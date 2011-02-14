@@ -16,3 +16,7 @@ Execute Emacs command:
 By default *Sonatypes Maven Central Repository*  is used. You can configure your own Nexus Server:
 
  M-x customize-variable nexus-rest-url
+
+# Screenshot
+ 
+![Just a screenshot](nexus-widget-screenshot.png) 
