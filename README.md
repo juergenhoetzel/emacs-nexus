@@ -19,4 +19,4 @@ By default *Sonatypes Maven Central Repository*  is used. You can configure your
 
 # Screenshot
  
-![Just a screenshot](nexus-widget-screenshot.png) 
+![Just a screenshot](emacs-nexus/nexus-widget-screenshot.png) 
