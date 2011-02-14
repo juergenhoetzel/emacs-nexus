@@ -13,6 +13,6 @@ Execute Emacs command:
 
 # Customization
 
-By default *Sonatypes Maven Central Repository*  is used. You can configure usage of your own Nexus Server:
+By default *Sonatypes Maven Central Repository*  is used. You can configure your own Nexus Server:
 
  M-x customize-variable nexus-rest-url
