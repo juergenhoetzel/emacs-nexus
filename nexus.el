@@ -91,5 +91,17 @@
 	(nexus-widget-display results)
       (message "No search results"))))
 
+(defun nexus-search-coordinates (group-id artifact-id version packaging classifier)
+  "Search Nexus repository by coordinates (groupId, artifactId, version, packaging, classifier as descriped in
+ 
+    http://maven.apache.org/pom.html#Maven_Coordinates"
+  (interactive "sgroupId: \nsartifactId: \nsversion: \nspackaging: \nsclassifier: ")
+  (let* ((pairs (list (cons "g" group-id) (cons "a" artifact-id) (cons "v" version) (cons "p" packaging) (cons "%c" classifier)))
+	 (qstring (mm-url-encode-www-form-urlencoded (remove-if-not (lambda (p) (string-match "[[:alnum:]]" (cdr p))) pairs)))
+	 (results (nexus-search-internal qstring)))
+    (if results
+	(nexus-widget-display results)
+      (message "No search results"))))
+
 (provide 'nexus) 
 ;;; nexus.el ends here
