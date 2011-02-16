@@ -13,6 +13,9 @@ Execute Emacs command:
 
 to search by keywords.
 
+   M-x nexus-search-coordinates
+
+to search by [Maven Coordinates](http://maven.apache.org/pom.html#Maven_Coordinates)  
 
 # Customization
 
