@@ -70,8 +70,8 @@
 	   'data))
    'artifact))
 
-(defun nexus-search-internal (string)
-  (let ((url (format "%s?q=%s" nexus-rest-url (mm-url-form-encode-xwfu string))))
+(defun nexus-search-internal (qstring)
+  (let ((url (format "%s?%s" nexus-rest-url qstring)))
     (message url)
     (condition-case err
 	(progn 
@@ -86,7 +86,7 @@
 
 (defun nexus-search-keyword (keyword)
   (interactive "sNexus keyword search: ")
-  (let ((results (nexus-search-internal keyword)))
+  (let ((results (nexus-search-internal (concat "q=" (mm-url-form-encode-xwfu keyword)))))
     (if results
 	(nexus-widget-display results)
       (message "No search results"))))
