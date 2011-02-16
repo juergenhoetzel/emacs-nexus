@@ -9,7 +9,10 @@ Your .emacs now needs something like this:
 
 Execute Emacs command:
 
-  M-x nexus-search
+  M-x nexus-search-keyword
+
+to search by keywords.
+
 
 # Customization
 

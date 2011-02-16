@@ -84,9 +84,9 @@
 		 (signal (car err) (cdr err))
 	       (message "nnrss: Failed to fetch %s" url))))))
 
-(defun nexus-search (string)
-  (interactive "sNexus Search: ")
-  (let ((results (nexus-search-internal string)))
+(defun nexus-search-keyword (keyword)
+  (interactive "sNexus keyword search: ")
+  (let ((results (nexus-search-internal keyword)))
     (if results
 	(nexus-widget-display results)
       (message "No search results"))))
