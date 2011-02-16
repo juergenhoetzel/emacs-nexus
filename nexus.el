@@ -100,5 +100,9 @@
 	 (qstring (mm-url-encode-www-form-urlencoded (remove-if-not (lambda (p) (string-match "[[:alnum:]]" (cdr p))) pairs))))
     (nexus-search-internal qstring)))
 
+(defun nexus-search-classname (classname)
+  (interactive "sNexus class name search: ")
+  (nexus-search-internal (concat "cn=" (mm-url-form-encode-xwfu classname))))
+
 (provide 'nexus) 
 ;;; nexus.el ends here
