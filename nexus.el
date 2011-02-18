@@ -39,6 +39,9 @@
 (defun nexus--response-artifact-get-child (xml child-name)
   (car (xml-get-children xml child-name)))
 
+(defun nexus--make-keyword-symbol (symbol)
+  (make-symbol (concat ":" (symbol-name symbol))))
+
 (defun nexus--response-artifact-to-alist (xml)
   "transform xml artifact fragment to an alist"
   (let ((tag (car xml)))
