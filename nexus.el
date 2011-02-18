@@ -36,30 +36,34 @@
 
 (defconst nexus-display-function 'nexus-widget-display)
 
+(defun nexus--response-artifact-get-child (xml child-name)
+  (car (xml-get-children xml child-name)))
+
 (defun nexus--response-artifact-to-alist (xml)
   "transform xml artifact fragment to an alist"
   (let ((tag (car xml)))
     (if (eq tag 'artifact)
-	(let* ((resource-uri-node (nth 3 xml))
+	(let* ((resource-uri-node (nexus--response-artifact-get-child xml 'resourceURI))
 	       (resource-uri-value (nth 2 resource-uri-node))
-	       (group-id-node (nth 5 xml))
+	       (group-id-node (nexus--response-artifact-get-child xml 'groupId))
 	       (group-id-value (nth 2 group-id-node))
-	       (artifact-id-node (nth 7 xml))
+	       (artifact-id-node (nexus--response-artifact-get-child xml 'artifactId))
 	       (artifact-id-value (nth 2 artifact-id-node))
-	       (version-node (nth 9 xml))
+	       (version-node (nexus--response-artifact-get-child xml 'version))
 	       (version-value (nth 2 version-node))
-	       (classifier-node (nth 11 xml))
-	       (classifier-value (nth 2 classifier-node)))
+	       (packaging-node (nexus--response-artifact-get-child xml 'packaging))
+	       (packaging-value (nth 2 packaging-node)))
 	  `((:resourceURI ,resource-uri-value)
 	    (:groupId ,group-id-value)
 	    (:artifactId ,artifact-id-value)
 	    (:version ,version-value)
-	    (:classifier ,classifier-value)))
+	    (:packaging ,packaging-value)))
       (warn "Invalid XML fragment: %s" tag))))
 
 ;; FIXME: This should be filtered by RST webservice?
 (defun nexus-artifact-jar-p (artifact)
-  (string= "jar" (cadr (assoc :classifier artifact))))
+  (message "%s" artifact)
+  (string= "jar" (cadr (assoc :packaging artifact))))
 
 (defun nexus--response-artifacts (xml)
   "Return search-results->data->artifact childrens of search response"
