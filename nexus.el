@@ -51,19 +51,18 @@
 	       (artifact-id-value (nth 2 artifact-id-node))
 	       (version-node (nexus--response-artifact-get-child xml 'version))
 	       (version-value (nth 2 version-node))
-	       (packaging-node (nexus--response-artifact-get-child xml 'packaging))
-	       (packaging-value (nth 2 packaging-node)))
+	       (classifier-node (nexus--response-artifact-get-child xml 'classifier))
+	       (classifier-value (nth 2 classifier-node)))
 	  `((:resourceURI ,resource-uri-value)
 	    (:groupId ,group-id-value)
 	    (:artifactId ,artifact-id-value)
 	    (:version ,version-value)
-	    (:packaging ,packaging-value)))
+	    (:classifier ,classifier-value)))
       (warn "Invalid XML fragment: %s" tag))))
 
-;; FIXME: This should be filtered by RST webservice?
 (defun nexus-artifact-jar-p (artifact)
-  (message "%s" artifact)
-  (string= "jar" (cadr (assoc :packaging artifact))))
+  (let ((classifier (cadr (assoc :classifier artifact))))
+    (or (null classifier) (string= "jar" classifier))))
 
 (defun nexus--response-artifacts (xml)
   "Return search-results->data->artifact childrens of search response"
