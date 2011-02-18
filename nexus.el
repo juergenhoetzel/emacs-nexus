@@ -76,7 +76,6 @@
 
 (defun nexus-search-internal (qstring)
   (let ((url (format "%s?%s" nexus-rest-url qstring)))
-    (message url)
     (condition-case err
 	(progn 
 	  (with-temp-buffer
