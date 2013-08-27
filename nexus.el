@@ -1,6 +1,6 @@
 ;;; nexus.el --- REST Client for Nexus Maven Repository servers
 
-;; Copyright (C) 2011  Juergen Hoetzel
+;; Copyright (C) 2011-2013  Juergen Hoetzel
 
 ;; Author: Juergen Hoetzel <juergen@archlinux.org>
 ;; Keywords: comm
@@ -30,7 +30,7 @@
 (require 'nexus-widget)
 
 (defcustom nexus-rest-url
-  "http://repository.sonatype.org/service/local/data_index"
+  "http://repository.sonatype.org/service/local/lucene/search"
   "URL of Nexus REST API. Customize if you use an private/custom Nexus server"
   :group 'nexus)
 
