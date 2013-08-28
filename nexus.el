@@ -72,19 +72,19 @@
 	(progn
 	  (with-temp-buffer
 	    (mm-url-insert url)
-	    (let ((results (remove-if-not 'nexus-artifact-jar-p
-					  (mapcar 'nexus--response-artifact-to-alist
-						  (nexus--response-artifacts (xml-parse-region (point-min) (point-max)))))))
-	      (if results
-		  (nexus-widget-display results)
-		(message "No search results")))))
+	    (remove-if-not 'nexus-artifact-jar-p
+			   (mapcar 'nexus--response-artifact-to-alist
+				   (nexus--response-artifacts (xml-parse-region (point-min) (point-max)))))))
       (error (if (or debug-on-quit debug-on-error)
 		 (signal (car err) (cdr err))
 	       (message "nnrss: Failed to fetch %s" url))))))
 
 (defun nexus-search-keyword (keyword)
   (interactive "sNexus keyword search: ")
-  (nexus-search-internal (concat "q=" (mm-url-form-encode-xwfu keyword))))
+  (let ((results (nexus-search-internal (concat "q=" (mm-url-form-encode-xwfu keyword)))))
+    (if results
+	(nexus-widget-display results)
+      (message "No search results"))))
 
 (defun nexus-search-coordinates (group-id artifact-id version packaging classifier)
   "Search Nexus repository by coordinates (groupId, artifactId, version, packaging, classifier as descriped in
@@ -93,11 +93,17 @@
   (interactive "sgroupId: \nsartifactId: \nsversion: \nspackaging: \nsclassifier: ")
   (let* ((pairs (list (cons "g" group-id) (cons "a" artifact-id) (cons "v" version) (cons "p" packaging) (cons "%c" classifier)))
 	 (qstring (mm-url-encode-www-form-urlencoded (remove-if-not (lambda (p) (string-match "[[:alnum:]]" (cdr p))) pairs))))
-    (nexus-search-internal qstring)))
+    (let ((results (nexus-search-internal qstring)))
+      (if results
+	  (nexus-widget-display results)
+	(message "No search results")))))
 
 (defun nexus-search-classname (classname)
   (interactive "sNexus class name search: ")
-  (nexus-search-internal (concat "cn=" (mm-url-form-encode-xwfu classname))))
+  (let ((results (nexus-search-internal (concat "cn=" (mm-url-form-encode-xwfu classname)))))
+    (if results
+	(nexus-widget-display results)
+      (message "No search results"))))
 
 (provide 'nexus)
 ;;; nexus.el ends here
