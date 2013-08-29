@@ -27,6 +27,20 @@ By default *Sonatypes Maven Central Repository*  is used. You can configure your
 
  M-x customize-variable nexus-rest-url
 
-# Screenshot
+# ac-nexus
  
+## Installation
+
+Add to your .emacs file:
+
+     (require 'ac-nexus)
+     (add-hook 'clojure-mode-hook 'ac-source-lein-set-up)
+     
+
+The url client in pure elisp is much slower compared to external retrieving. 
+
+Recommended is setting up external url retriving i.e. setting  the custom variable `mm-url-use-external'  to a non nil value
+    (setq mm-url-use-external t)
+
+
 ![Just a screenshot](emacs-nexus/raw/master/nexus-widget-screenshot.png) 
