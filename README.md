@@ -33,7 +33,7 @@ By default *Sonatypes Maven Central Repository*  is used. You can configure your
 
 # ac-nexus
 
-A Nexus Source for Emacs Auto Complte Mode: https://github.com/auto-complete/auto-complete
+A Nexus Source for Emacs Auto Complete Mode: https://github.com/auto-complete/auto-complete
 
 ## Installation
 
