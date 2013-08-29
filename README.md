@@ -46,7 +46,11 @@ Add to your .emacs file:
 
 The url client in pure elisp is much slower compared to external retrieving. 
 
-Recommended is setting up external url retriving i.e. setting  the custom variable `mm-url-use-external'  to a non nil value
+Recommended is setting up external url retriving i.e. setting  the custom variable to a non nil value:
+
+```lisp
+(setq mm-url-use-external t)
+```
 
 ## Performance
 
