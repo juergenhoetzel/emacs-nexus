@@ -33,7 +33,7 @@ By default *Sonatypes Maven Central Repository*  is used. You can configure your
 
 # ac-nexus
 
-A Nexus Source for Emacs Auto Complte Mode: https://github.com/auto-complete/auto-complete 
+A Nexus Source for Emacs Auto Complte Mode: https://github.com/auto-complete/auto-complete
 
 ## Installation
 
@@ -47,6 +47,15 @@ Add to your .emacs file:
 The url client in pure elisp is much slower compared to external retrieving. 
 
 Recommended is setting up external url retriving i.e. setting  the custom variable `mm-url-use-external'  to a non nil value
+
+## Performance
+
+The Nexus Rest API is used for completion. Because of the huge amount of artifacts in Maven Central,  HTTP Responses can be very large (thus slow).
+To limit the size of the responses. only Artifact-IDs and Version Numbers are completed. Group-IDs are not completed.
+Also completion of Artifact-IDs only starts after entering 3 prefix characters. This prefix length is customizable via `nexus-ac-artifact-prefix-length`.
+
+It is recommended to use a local Nexus instance for performance reasons. When using a local Nexus instance you can also setup Clojars as a Mirror-Repository and get
+completion for Clojars artifacts.
 
 ```lisp
 (setq mm-url-use-external t)
