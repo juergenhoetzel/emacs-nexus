@@ -27,6 +27,10 @@ By default *Sonatypes Maven Central Repository*  is used. You can configure your
 
  M-x customize-variable nexus-rest-url
 
+# Screenshot
+
+![Nexus Widget](https://github.com/juergenhoetzel/emacs-nexus/raw/master/doc-img/nexus-widget-screenshot.png "Nexus Widget")
+
 # ac-nexus
  
 ## Installation
@@ -43,4 +47,4 @@ Recommended is setting up external url retriving i.e. setting  the custom variab
     (setq mm-url-use-external t)
 
 
-![Just a screenshot](emacs-nexus/raw/master/nexus-widget-screenshot.png) 
+
