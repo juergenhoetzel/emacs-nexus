@@ -80,7 +80,7 @@
   "Add an nexus completion source to the front of `ac-sources' for the current buffer,
 if the current `(buffer-filename)' = \"project.clj\""
   (interactive)
-  (when (string= (file-name-base (buffer-file-name)) "project")
+  (when (and (buffer-file-name) (string= (file-name-base (buffer-file-name)) "project"))
     (add-to-list 'ac-sources 'ac-source-nexus-lein)
     ;; we havev to complete version numbers inside strings
     (set (make-local-variable 'ac-disable-faces)
