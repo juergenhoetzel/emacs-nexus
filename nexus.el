@@ -27,13 +27,15 @@
 
 (require 'xml)
 (require 'mm-url)
+(require 'cl-lib)
 
 (require 'nexus-widget)
 
 (defcustom nexus-rest-url
   "http://repository.sonatype.org/service/local/lucene/search"
   "URL of Nexus REST API. Customize if you use an private/custom Nexus server"
-  :group 'nexus)
+  :group 'nexus
+  :type 'string)
 
 (defconst nexus-display-function 'nexus-widget-display)
 
@@ -61,9 +63,9 @@
 (defun nexus--response-artifacts (xml)
   "Return search-results->data->artifact childrens of search response"
   (xml-get-children
-   (first (xml-get-children
+   (car (xml-get-children
 	   ;; only one node: search-results
-	   (first xml)
+	   (car xml)
 	   'data))
    'artifact))
 
@@ -73,7 +75,7 @@
 	(progn
 	  (with-temp-buffer
 	    (mm-url-insert url)
-	    (remove-if-not 'nexus-artifact-jar-p
+	    (cl-remove-if-not 'nexus-artifact-jar-p
 			   (mapcar 'nexus--response-artifact-to-alist
 				   (nexus--response-artifacts (xml-parse-region (point-min) (point-max)))))))
       (error (if (or debug-on-quit debug-on-error)
@@ -89,7 +91,7 @@
 
 (defun nexus--search-coordinates-internal (group-id artifact-id version packaging classifier)
   (let* ((pairs (list (cons "g" group-id) (cons "a" artifact-id) (cons "v" version) (cons "p" packaging) (cons "%c" classifier)))
-	 (qstring (mm-url-encode-www-form-urlencoded (remove-if-not (lambda (p) (string-match "[[:alnum:]]" (cdr p))) pairs))))
+	 (qstring (mm-url-encode-www-form-urlencoded (cl-remove-if-not (lambda (p) (string-match "[[:alnum:]]" (cdr p))) pairs))))
     (nexus-search-internal qstring)))
 
 (defun nexus-search-coordinates (group-id artifact-id version packaging classifier)
