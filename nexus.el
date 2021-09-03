@@ -52,7 +52,7 @@
 	(let ((artifact-attributes '(artifactId groupId resourceURI version classifier)))
 	  (mapcar (lambda (attribute)
 		    `(,(nexus--make-keyword-symbol attribute)
-		      ,(caddr (nexus--response-artifact-get-child xml attribute)))
+		      ,(cl-caddr (nexus--response-artifact-get-child xml attribute)))
 		    ) artifact-attributes))
       (warn "Invalid XML fragment: %s" tag))))
 
