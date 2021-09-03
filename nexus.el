@@ -1,9 +1,10 @@
 ;;; nexus.el --- REST Client for Nexus Maven Repository servers
 
-;; Copyright (C) 2011-2013  Juergen Hoetzel
+;; Copyright (C) 2011-2021  Juergen Hoetzel
 
 ;; Author: Juergen Hoetzel <juergen@archlinux.org>
 ;; Keywords: comm
+;; Version: 1.0-snapshot
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
