@@ -40,5 +40,5 @@ jobs:
 
     - name: Byte-compile project
       run: |
-        eldev -dtT -C compile --set all --warnings-as-errors nexus.el
+        eldev -dtT -C compile --set all --warnings-as-errors nexus.el nexus-widget.el
 

@@ -1,6 +1,6 @@
-;;; nexus-widget.el --- Widgets for Nexus Client
+;;; nexus-widget.el --- Widgets for Nexus Client  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2011  Juergen Hoetzel
+;; Copyright (C) 2011-2021  Juergen Hoetzel
 
 ;; Author: Juergen Hoetzel <juergen@archlinux.org>
 ;; Keywords: comm
@@ -23,6 +23,8 @@
 ;; 
 
 ;;; Code:
+
+(require 'wid-edit)
 
 (defcustom nexus-widget-buffer-name "*nexus*"
   "The buffer name of Nexus client displaying the search results."
@@ -56,7 +58,7 @@
     km)
   "Keymap used in recentf dialogs.")
 
-(defun nexus-widget-toggle-hide (widget &optional event)
+(defun nexus-widget-toggle-hide (widget &optional _)
   (let ((new-value (if (widget-value widget) nil t))
 	(xml-string (widget-get widget :xml-string))
 	(insert-pos (marker-position (widget-get widget :to)))
@@ -83,9 +85,9 @@
 	<artifactId>%s</artifactId>
 	<version>%s</version>\n</dependency>\n" group-id artifact-id version)))
     ;; poor mans closures
-    (lexical-let ((artifact artifact))
+    (let ((artifact artifact))
       (widget-create 'push-button
-		     :notify (lambda (&rest ignore) 
+		     :notify (lambda (&rest _)
 			       (let ((url (cadr (assoc :resourceURI  artifact))))
 				 (url-copy-file url (file-name-nondirectory url))))
 		     artifact-string))
@@ -98,7 +100,7 @@
      :xml-string maven-string
      :action 'nexus-widget-toggle-hide)))
 
-(defun nexus-widget-quit (&rest ignore)
+(defun nexus-widget-quit (&rest _)
   (interactive)
   (kill-buffer (current-buffer))
   (message "Nexus search result canceled"))
@@ -120,7 +122,7 @@
     (nexus-widget-artifact artifact))
   (nexus-widget-mode)
   (setq buffer-read-only t)
-  (beginning-of-buffer))
+  (goto-char (point-min)))
 
 (provide 'nexus-widget)
 ;;; nexus-widget.el ends here
