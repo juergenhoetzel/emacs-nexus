@@ -42,3 +42,6 @@ jobs:
       run: |
         eldev -dtT -C compile --set all --warnings-as-errors nexus.el nexus-widget.el
 
+    - name: Run tests
+      run: |
+        eldev test
