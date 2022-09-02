@@ -82,6 +82,7 @@
 		 (signal (car err) (cdr err))
 	       (message "nnrss: Failed to fetch %s" url))))))
 
+;;;###autoload
 (defun nexus-search-keyword (keyword)
   (interactive "sNexus keyword search: ")
   (let ((results (nexus-search-internal (concat "q=" (mm-url-form-encode-xwfu keyword)))))
@@ -94,6 +95,7 @@
 	 (qstring (mm-url-encode-www-form-urlencoded (cl-remove-if-not (lambda (p) (string-match "[[:alnum:]]" (cdr p))) pairs))))
     (nexus-search-internal qstring)))
 
+;;;###autoload
 (defun nexus-search-coordinates (group-id artifact-id version packaging classifier)
   "Search Nexus repository by coordinates (groupId, artifactId, version, packaging, classifier as descriped in
 
@@ -104,6 +106,7 @@
 	(nexus-widget-display results)
       (message "No search results"))))
 
+;;;###autoload
 (defun nexus-search-classname (classname)
   (interactive "sNexus class name search: ")
   (let ((results (nexus-search-internal (concat "cn=" (mm-url-form-encode-xwfu classname)))))
